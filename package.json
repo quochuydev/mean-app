@@ -15,7 +15,7 @@
     "reinstall": "npm cache clean && npm run clean && npm install",
     "start": "node server.js",
     "postinstall": "bower install --config.interactive=false",
-    "build": "./deploy/build.sh"
+    "build": "npm run clean && npm postinstall && npm install && npm start"
   },
   "dependencies": {
     "amqp-connection-manager": "^2.1.0",
