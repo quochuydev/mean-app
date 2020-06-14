@@ -83,7 +83,7 @@ const config = {
     sync_order: false
   },
   rabbit: {
-    active: true,
+    active: false,
     publisher_active: true,
     consumer_active: true,
     prefix: 'dlcapp_',
