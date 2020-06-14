@@ -1,0 +1,302 @@
+<!-- <meta http-equiv="refresh" content="10"> -->
+<header-title main-href="admin.promotions" page-title="Tạo khuyến mãi" main-title="Khuyến mãi">
+</header-title>
+<div class="row">
+  <form name="createForm" accessible-form novalidate>
+    <div class="col-md-12" style="height: 55px;">
+      <button type="button" ng-click="elem.action.create(createForm)" class="btn btn-primary right m-l-10 p-y-10"
+        style="width: 90px;"><i class="fa fa-check"></i> Lưu</button>
+      <a href="#" ui-sref="admin.promotions" class="btn btn-default right p-y-10" style="width: 90px;">Thoát</a>
+    </div>
+    <div class="col-md-8">
+      <div class="panel-box p-y-15">
+        <p class="p-x-15 info-title">Điều kiện khuyến mãi</p>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group p-x-15">
+              <p>Loại chương trình khuyến mãi</p>
+              <select class="form-control" ng-model="elem.promotion.type"
+                ng-options="promotion_type.value as promotion_type.name for promotion_type in _CONST.PROMOTION._TYPES"></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-x-15 color-gray text-700" style="display: -webkit-inline-box;">
+          <img src="{{appslug + '/modules/core/client/img/condition.png'}}" width="16px" style="margin-top: -5px;">
+          <p>&nbsp;SẢN PHẨM MUA</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group p-x-15 m-none" show-errors>
+              <p>Số lượng <span style="color:#f00">*</span></p>
+              <input type="text" id="promotion_buy_quantity" name="promotion_buy_quantity" class="form-control"
+                ng-model="elem.promotion.condition_quantity" required only-number>
+            </div>
+          </div>
+          <div class="col-md-8" ng-show="elem.promotion.condition_type_apply == 'product'">
+            <p style="margin: 0 15px 10px;">Sản phẩm <span style="color:#f00">*</span></p>
+            <search-box-products-variant placeholder="Nhập tên sản phẩm để tìm kiếm" class="m-x-15"
+              selected-item="elem.promotion_buy.product_selected" params="searchBoxParams"
+              check-valid="createForm.$submitted && !elem.promotion.condition_items.length" style="z-index: 2;">
+            </search-box-products-variant>
+          </div>
+        </div>
+
+        <div class="row p-x-15">
+          <div class="col-md-4 form-group" ng-show="false" show-errors>
+            <select id="promotion_buy_type_apply" name="promotion_buy_type_apply" class="form-control"
+              ng-model="elem.promotion.condition_type_apply" ng-change="elem.action.change('promotion_buy_type_apply')"
+              required>
+              <option value="">-- Vui lòng chọn --</option>
+              <option value="product">Sản phẩm</option>
+            </select>
+          </div>
+          <div class="col-md-12"
+            ng-show="elem.promotion.condition_type_apply == 'product' && elem.promotion.condition_items.length">
+            <table class="table table-condition_items m-t-15">
+              <thead>
+                <th class="text-700 color-gray text-14">Sản phẩm</th>
+                <th width="50"></th>
+              </thead>
+              <tbody ng-repeat="item in elem.promotion.condition_items">
+                <tr ng-repeat="variant in item.variants">
+                  <td class="product-table_line-main-name" style="position: relative;">
+                    <div class="product-image" style="position: absolute; top: 5px;">
+                      <img ng-if="item.images[0]" ng-src={{item.images[0].src}} width="40px">
+                      <div ng-if="!item.images[0]" class="img-empty img-empty-bg fa-empty-images"
+                        style="position: absolute; top: 0;"></div>
+                    </div>
+                    <div class="product-title" style="margin-left: 55px;">
+                      <p>{{item.title}}</p>
+                      <p>{{variant.title}} <span ng-if="variant.sku"> || {{variant.sku}}</span></p>
+                    </div>
+                  </td>
+                  <td>
+                    <a href="#" ng-click="elem.action.remove_line('buy_variant', variant)">
+                      <i class="fa fa-remove"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="p-x-15 m-t-15 color-gray text-700" style="display: -webkit-inline-box;">
+          <img src="{{appslug + '/modules/core/client/img/promotion.png'}}" width="16px" style="margin-top: -5px;">
+          <p>&nbsp;SẢN PHẨM KHUYẾN MÃI</p>
+        </div>
+
+        <div class="row p-x-15">
+          <div class="col-md-12">
+            <p>Sản phẩm <span style="color:#f00">*</span></p>
+          </div>
+          <div class="col-md-4 form-group" ng-show="false" show-errors>
+            <select id="promotion_get_type_apply" name="promotion_get_type_apply" class="form-control"
+              ng-model="elem.promotion.promotion_type_apply" ng-change="elem.action.change('promotion_get_type_apply')"
+              required>
+              <option value="">-- Vui lòng chọn --</option>
+              <option value="product">Sản phẩm</option>
+            </select>
+          </div>
+          <div ng-show="elem.promotion.promotion_type_apply == 'product'">
+            <div class="col-md-12">
+              <search-box-products-variant placeholder="Nhập tên sản phẩm để tìm kiếm"
+                selected-item="elem.promotion_get.product_selected" params="searchBoxParams"
+                check-valid="createForm.$submitted && !elem.promotion.promotion_items.length" style="z-index: 1;">
+              </search-box-products-variant>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-table" ng-show="elem.promotion.promotion_items.length">
+          <div class="product-table_header m-y-5 p-b-10 text-700 color-gray">
+            <div class="col-md-6">
+              Sản phẩm
+            </div>
+            <div class="col-md-2">
+              SL khuyến mãi
+            </div>
+            <div class="col-md-2">
+              Giảm theo
+            </div>
+            <div class="col-md-2">
+              Giá trị giảm
+            </div>
+          </div>
+
+          <div class="product-table_body p-x-10" ng-repeat="item in elem.promotion.promotion_items">
+            <div class="product-table_line-main" ng-repeat="variant in item.variants">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="product-table_line-main-name" style="position: relative;">
+                    <div ng-if="variant.image" class="product-image" style="position: absolute; top: 0;">
+                      <img ng-src={{variant.image}} width="50px"></div>
+                    <div ng-if="!variant.image" class="img-empty img-empty-bg fa-empty-images"
+                      style="position: absolute; top: 0;"></div>
+
+                    <div class="product-title" style="margin-left: 55px;">
+                      <p>{{item.title}}</p>
+                      <p>{{variant.title}} <span ng-if="variant.sku"> - {{variant.sku}}</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 p-l-none">
+                  <div class="product-table_line-main-quantity form-group" show-errors>
+                    <input type="text" class="form-control" name="get_quantity_apply[{{variant.id}}]"
+                      ng-model="variant.quantity_apply" required autocomplete="off" only-number>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="product-table_line-product_discount_type">
+                    <select class="form-control" ng-model="variant.promotion_type"
+                      ng-options="promotion_type.value as promotion_type.name for promotion_type in promotion_types"
+                      ng-change="changeVariantPromotionType(variant)"></select>
+                  </div>
+                </div>
+                <div class="col-md-2" style="display: flex;">
+                  <div class="product-table_line-main-discount form-group" show-errors>
+                    <input type="text" class="form-control" name="get_promotion_value[{{variant.id}}]"
+                      ng-model="variant.promotion_value"
+                      ng-disabled="[_CONST.PROMOTION.DISCOUNT_TYPE.GIFT].includes(variant.promotion_type)"
+                      ng-required="![_CONST.PROMOTION.DISCOUNT_TYPE.GIFT].includes(variant.promotion_type)"
+                      autocomplete="off" only-number>
+                  </div>
+                  <div class="product-table_line-main-option m-l-10" style="line-height: 28px;">
+                    <a href="#" ng-click="elem.action.remove_line('get_variant', variant)">
+                      <i class="fa fa-remove"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 p-l-none xs-p-l-15">
+      <div class="panel-box p-y-15">
+        <p class="p-x-15 info-title">Thông tin khuyến mãi</p>
+
+        <div class="form-group p-x-15" show-errors>
+          <p>Trạng thái</p>
+          <select id="promotion_status" name="promotion_status" class="form-control" ng-model="elem.promotion.status">
+            <option value="1">Hoạt động</option>
+            <option value="2">Không hoạt động</option>
+          </select>
+        </div>
+
+        <div class="form-group p-x-15" show-errors>
+          <p>Mã CTKM <span style="color:#f00">*</span></p>
+          <input type="text" id="promotion_code" name="promotion_code" class="form-control"
+            ng-model="elem.promotion.code" required />
+        </div>
+
+        <div class="form-group p-x-15" show-errors>
+          <p>Tên CTKM <span style="color:#f00">*</span></p>
+          <input type="text" id="promotion_name" name="promotion_name" class="form-control"
+            ng-model="elem.promotion.name" required />
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="form-group p-x-15">
+          <p>Thời gian bắt đầu khuyến mãi <span style="color:#f00">*</span></p>
+          <form-datetime-picker id="start_date" fz="11.6" ng-model="elem.promotion.start_date"
+            init-date="elem.promotion.start_date" enable-time="true" class="no-padding" is-required="true">
+          </form-datetime-picker>
+        </div>
+
+        <div class=" form-group p-x-15">
+          <p>Thời gian kết thúc khuyến mãi <span style="color:#f00">*</span></p>
+          <form-datetime-picker id="end_date" fz="11.6" ng-model="elem.promotion.end_date"
+            init-date="elem.promotion.end_date" enable-time="true" class="no-padding" disabled="elem.promotion.not_expired"
+            is-required="!elem.promotion.not_expired">
+          </form-datetime-picker>
+        </div>
+
+        <div class="checkbox">
+          <label class="p-none"><input type="checkbox" value="true" id="promotion_not_expired"
+              name="promotion_not_expired" ng-model="elem.promotion.not_expired" style="margin-top: 3px;"
+              ng-change="changeIsExpired()">
+            <span>Không bao giờ hết hạn</span>
+          </label>
+        </div>
+
+        <div class="form-group p-x-15">
+          <p>Nhóm khách hàng</p>
+          <multi-select-box id="promotion_customer_groups" init-items="customer_groups" output-properties="id"
+            init-selected-items="null" ng-model="promotion_customer_groups">
+          </multi-select-box>
+        </div>
+
+        <div class="form-group p-x-15">
+          <p>Kênh áp dụng</p>
+          <multi-select-box id="promotion_source_names" init-items="source_names" output-properties="code"
+            init-selected-items="null" ng-model="promotion_source_names">
+          </multi-select-box>
+        </div>
+
+        <div class="form-group p-x-15">
+          <p>Cửa hàng</p>
+          <multi-select-box id="promotion_locations" init-items="locations" init-selected-items="null"
+            output-properties="id" ng-model="promotion_locations">
+          </multi-select-box>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<modal title-modal="CHỌN NHÓM SẢN PHẨM" class="width-60-percent-modal" visible="isShowProductGroup">
+  <search-box placeholder="Tìm kiếm" resource="Product" resource-method="groups" resource-key="groups" key-field="id"
+    title-prop="title" selected-item="elem.product_groups.group_selected"
+    search-text="elem.product_groups.group_selected.title">
+  </search-box>
+  <div style="min-height: 200px;">
+    <table class="table table-product-groups" ng-show="group_products.length">
+      <thead>
+        <tr>
+          <th class="p-none" width="80">
+            <div class="checkbox">
+              <i class="fa fa-square" ng-if="!elem.product_groups.valid_check_all()"
+                ng-click="elem.product_groups.checked_all()"></i>
+              <i class="fa fa-check-square" ng-if="elem.product_groups.valid_check_all()"
+                ng-click="elem.product_groups.checked_all()"></i>
+            </div>
+          </th>
+          <th>Sản phẩm</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="product in group_products">
+          <td class="p-none">
+            <div class="checkbox">
+              <i class="fa fa-square" ng-if="!elem.product_groups.valid_check(product.id)"
+                ng-click="elem.product_groups.checked('add', product)"></i>
+              <i class="fa fa-check-square" ng-if="elem.product_groups.valid_check(product.id)"
+                ng-click="elem.product_groups.checked('remove', product)"></i>
+            </div>
+          </td>
+          <td>
+            <div class="product-table_line-main-name" style="position: relative;">
+              <div class="product-image" style="position: absolute; top: -5px;">
+                <img ng-src={{product.img}} alt="" width="40px">
+              </div>
+              <div class="product-title" style="margin-left: 55px;">
+                <p>{{product.title}}</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="right">
+    <a href="#" class="btn btn-default" ng-click="elem.modal.close()">Hủy</a>
+    <a href="#" class="btn btn-primary" ng-click="elem.product_groups.apply_products()">Chọn</a>
+  </div>
+</modal>
