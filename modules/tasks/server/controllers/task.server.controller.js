@@ -13,15 +13,15 @@ async function search(req, res, next) {
 }
 
 async function detail(req, res, next) {
-  let { params, user } = req;
-  let result = await TaskService.get({ params, user, orgid: req.session.orgid, shop: req.session.shop });
+  let { params } = req;
+  let result = await TaskService.get({ params });
   res.json(result);
 }
 
 async function write(req, res, next) {
   try {
-    let { body, user } = req;
-    let result = await TaskService.write({ body, user, orgid: req.session.orgid, shop: req.session.shop });
+    let { body } = req;
+    let result = await TaskService.write({ body });
     res.json(result);
   } catch (error) {
     res.status(400).send(error);

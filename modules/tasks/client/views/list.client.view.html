@@ -46,7 +46,7 @@
         <input type="text" class="form-control" placeholder="Nhập mã/tên chương trình để tìm kiếm" ng-model="codeSearch"
           ng-keyup="changeCodeSearch()" style="border: none; height: 39px;" />
       </div>
-      <a ui-sref="admin.promotions-create" class="btn btn-primary right m-l-5" style="line-height: 22px;">
+      <a ui-sref="admin.tasks-create" class="btn btn-primary right m-l-5" style="line-height: 22px;">
         <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" class="icon-svg">
           <path fill-rule="evenodd" clip-rule="evenodd"
             d="M6.99992 0.333374C3.31992 0.333374 0.333252 3.32004 0.333252 7.00004C0.333252 10.68 3.31992 13.6667 6.99992 13.6667C10.6799 13.6667 13.6666 10.68 13.6666 7.00004C13.6666 3.32004 10.6799 0.333374 6.99992 0.333374ZM6.33325 3.66671V6.33337H3.66658V7.66671H6.33325V10.3334H7.66658V7.66671H10.3333V6.33337H7.66658V3.66671H6.33325ZM1.66659 7.00004C1.66659 9.94004 4.05992 12.3334 6.99992 12.3334C9.93992 12.3334 12.3333 9.94004 12.3333 7.00004C12.3333 4.06004 9.93992 1.66671 6.99992 1.66671C4.05992 1.66671 1.66659 4.06004 1.66659 7.00004Z">
@@ -75,39 +75,27 @@
     <div class="col-md-12">
       <div class="table-responsive" style="max-width: 100%; min-width: 100%; overflow-x: auto; overflow-y: hidden;"
         loading="loadingTable" loading-timeout="800">
-        <table class="table table-promotion">
+        <table class="table table-custom">
           <thead>
-            <th width="150">Mã chương trình</th>
-            <th width="410" style="min-width: 300px;">Chi tiết</th>
-            <th width="150">Bắt đầu</th>
-            <th width="150">Kết thúc</th>
-            <th width="150">Người tạo</th>
+            <th width="150">Title</th>
+            <th width="410" style="min-width: 300px;">Mô tả</th>
             <th class="width_header_tooltip text-center" width="50"></th>
           </thead>
           <tbody>
             <tr ng-if="!totalItems">
               <td colspan="6" class="text-center" style="height: 100px; line-height: 100px;">{{MSG('ME-00001')}}</td>
             </tr>
-            <tr ng-if="totalItems" ng-repeat="promotion in promotions track by promotion._id">
+            <tr ng-if="totalItems" ng-repeat="task in tasks track by task._id">
               <td>
-                <a ui-sref="admin.promotions-detail({promotionId: promotion._id})">
-                  <i class="fa fa-circle" style="color: #DD5D35;" ng-if="promotion.status != 1"></i>
-                  <i class="fa fa-circle" style="color: #03A9F4;" ng-if="promotion.status == 1"></i>
-                  {{promotion.code}}
+                <a ui-sref="admin.tasks-detail({taskId: task._id})">
+                  {{task.title}}
                 </a>
               </td>
               <td>
-                <p>{{promotion.name}}</p>
-                <span ng-bind-html="promotion.description" class="m-b-5" style="display: block;"></span>
-                <p><span class="text-gray">Đối tượng khách hàng:</span> {{promotion._customer_groups || 'Tất cả'}}</p>
-                <p><span class="text-gray">Kênh áp dụng:</span> {{promotion._source_names || 'Tất cả'}}</p>
-                <p><span class="text-gray">Cửa hàng:</span> {{promotion._locations || 'Tất cả'}}</p>
+                <p>{{task.description}}</p>
               </td>
-              <td>{{(promotion.start_date | formatVnDateHourMin) || '-'}}</td>
-              <td>{{(promotion.end_date | formatVnDateHourMin) || '-'}}</td>
-              <td>{{[promotion._user_created.first_name, promotion._user_created.last_name].join(' ')}}</td>
               <td class="text-center">
-                <tooltip-action data="promotion" func="elem.action"></tooltip-action>
+                <tooltip-action data="task" func="elem.action"></tooltip-action>
               </td>
             </tr>
           </tbody>
@@ -143,6 +131,6 @@
   </div>
   <div class="right">
     <a href="#" class="btn btn-default" ng-click="elem.modal.close()">Hủy</a>
-    <a href="#" class="btn btn-primary" ng-click="elem.action.delete(promotionId)">Xác nhận</a>
+    <a href="#" class="btn btn-primary" ng-click="elem.action.delete(taskId)">Xác nhận</a>
   </div>
 </modal>

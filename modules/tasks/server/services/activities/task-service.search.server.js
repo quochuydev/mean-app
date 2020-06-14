@@ -36,9 +36,8 @@ module.exports = ({ TaskModel }) => async function (data) {
         }
       })
     }
-    return result;
   } catch (error) {
     console.log(error);
-    return result;
   }
+  return result;
 }

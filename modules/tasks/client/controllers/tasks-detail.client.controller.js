@@ -1,35 +1,25 @@
 'use strict';
 
-angular.module('promotions.admin').controller('TaskDetailController',
-  ['$scope', 'Product', 'Promotion', '$state', 'Loading',
-    async function ($scope, Product, Promotion, $state, Loading) {
+angular.module('tasks.admin').controller('TaskDetailController',
+  ['$scope', 'Product', 'Task', '$state', 'Loading',
+    async function ($scope, Product, Task, $state, Loading) {
       $scope._do = _do;
       $scope._CONST = _CONST;
-      $scope.PromotionUtil = PromotionUtil;
 
       $scope.elem = {
-        promotion: {
+        task: {
           reset: function () {
 
           },
           init: function () {
             Loading.show(true);
-            Promotion.get({ promotionId: $state.params.promotionId }, function (data) {
-              let promotion = data.item;
-              if (promotion && promotion.locations) {
-                promotion._locations = promotion.locations.map(e => e.name).join(', ');
-              }
-              if (promotion && promotion.customer_groups) {
-                promotion._customer_groups = promotion.customer_groups.map(e => e.name).join('\n');
-              }
-              if (promotion && promotion.source_names) {
-                promotion._source_names = promotion.source_names.map(e => e.name).join(', ');
-              }
-              $scope.promotion = PromotionUtil.renderClient(promotion);
-              Loading.show(false);
+            Task.get({ taskId: $state.params.taskId }, function (data) {
+              let task = data.item;
+              $scope.task = task;
             }, function () {
               Loading.show(false);
             })
+            Loading.show(false);
           },
           config: function () {
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('promotions.admin').controller('TaskController',
+angular.module('tasks.admin').controller('TaskController',
   ['$scope', 'Location', '$timeout', '$filter', 'Task', 'ToastMessage', 'User', 'CustomerGroup', 'Loading',
     async function ($scope, Location, $timeout, $filter, Task, ToastMessage, User, CustomerGroup, Loading) {
       $scope._do = _do;
@@ -75,25 +75,10 @@ angular.module('promotions.admin').controller('TaskController',
               $scope.loadingTable = true;
               Task.search(query, function (result) {
                 $scope.totalItems = result.total;
-                $scope.promotions = result.items;
-                for (let i = 0; i < $scope.promotions.length; i++) {
-                  const promotion = $scope.promotions[i];
-                  if (promotion && promotion.customer_groups) {
-                    promotion._customer_groups = promotion.customer_groups.map(e => e.name).join(', ');
-                  }
-                  if (promotion && promotion.source_names) {
-                    promotion._source_names = promotion.source_names.map(e => e.name).join(', ');
-                  }
-                  if (promotion && promotion.locations) {
-                    promotion._locations = promotion.locations.map(e => e.name).join(', ');
-                  }
-                  let promotion_client = TaskUtil.renderClient(promotion);
-                  let objData = TaskUtil.makeDataDescription(promotion_client);
-                  TaskUtil.parseDescription(promotion, objData);
-                }
+                $scope.tasks = result.items;
                 $scope.loadingTable = false;
                 Loading.show(false);
-                // console.log('$scope.promotions', $scope.promotions)
+                // console.log('$scope.tasks', $scope.tasks)
               })
             }
 
@@ -195,7 +180,7 @@ angular.module('promotions.admin').controller('TaskController',
         },
         tooltip: {
           init: function () {
-            $scope.promotionId = null;
+            $scope.taskId = null;
             $scope.tooltipFilter = false;
             $scope.elem.filter.change();
           },
@@ -215,10 +200,10 @@ angular.module('promotions.admin').controller('TaskController',
         action: {
           showDelete: function (id) {
             $scope.elem.modal.show('isShowDeleteTask');
-            $scope.promotionId = id;
+            $scope.taskId = id;
           },
           delete: function (id) {
-            Task.delete({ promotionId: id }, function (data) {
+            Task.delete({ taskId: id }, function (data) {
               $scope.searchFilter();
               $scope.elem.modal.close();
               return ToastMessage.info(MSG('ME-00014'));
@@ -229,13 +214,13 @@ angular.module('promotions.admin').controller('TaskController',
             });
           },
           inactive: function (id) {
-            Task.changeStatus({ promotionId: id, status: 2 }, function () {
+            Task.changeStatus({ taskId: id, status: 2 }, function () {
               ToastMessage.info(MSG('ME-00013'));
               $scope.searchFilter();
             })
           },
           active: function (id) {
-            Task.changeStatus({ promotionId: id, status: 1 }, function () {
+            Task.changeStatus({ taskId: id, status: 1 }, function () {
               ToastMessage.info(MSG('ME-00013'));
               $scope.searchFilter();
             })

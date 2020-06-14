@@ -366,13 +366,13 @@ ol, ul, li{
     margin: auto;
 }
 
-.table-promotion {
+.table-promotion, .table-custom  {
     display: inline-table;
     border-radius: 3px;
     background: white;
 }
 
-.table-promotion th {
+.table-promotion th, .table-custom th {
     height: 45px;
     background: #FCFCFC;
 }
@@ -381,7 +381,7 @@ ol, ul, li{
     background: #FCFCFC;
 }
 
-.table-promotion tr td {
+.table-promotion tr td, .table-custom  tr td {
     vertical-align: top !important;
 }
 
