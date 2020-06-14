@@ -266,7 +266,7 @@ function handler(it) {
 }
 
 injectConfig({ service : OMNI, config : {
-  baseUrl: hara_app.protocol + hara_app.host_name,
+  baseUrl: 'https://apis.hara.vn',
   json : true, 
   before : setHrHeader, 
   handler : handler, 
