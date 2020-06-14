@@ -67,7 +67,7 @@ const ShopBus = {
     return async function authenticate(err, user, info) {
       if (err || !user) {
         if (info && info.code && ['ERR_NOT_FOUND_SHOP', 'ERR_UNINSTALLED'].includes(info.code)) {
-          return res.json({ error: false, code: 'REDIRECT', url: '/' + config.appslug + config.hara_app.install_url });
+          return res.json({ error: false, code: 'REDIRECT', url: '/' });
         }
         return res.redirect('/' + config.appslug + '/permission')
       }

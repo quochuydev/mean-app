@@ -25,7 +25,7 @@ module.exports = function () {
       if (!foundShop.status) return done(null, false, { code: 'ERR_UNINSTALLED', message: 'ERR UNINSTALLED!' });
       let user = await UserMD.findOne({ id: userHR.id, is_deleted: false }).lean(true);
       if (!user || !user.id) return done(null, false, { code: 'ERR_STEP_FIND_USER', message: 'ERR NOT FOUND USER!' });
-      done(null, user, {shop: foundShop});
+      done(null, user, { shop: foundShop });
     } catch (error) {
       nlogger.writelog(nlogger.NLOGGER_ERROR, 'Authen HARA_ACCOUNT failed', { filename: __filename, fn: 'SIGNIN_HARA_ACCOUNT' });
       done(true, null);
@@ -35,6 +35,7 @@ module.exports = function () {
 
 const getHrToken = (code) => {
   return new Promise((resolve, reject) => {
+    return resolve({});
     let params = {};
     params.grant_type = 'authorization_code';
     params.redirect_uri = config.apphost + '/' + config.appslug + config.hara_app.login_callback_url;

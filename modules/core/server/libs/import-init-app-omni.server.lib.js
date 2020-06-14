@@ -58,17 +58,6 @@ class ImportInitAppOmni {
     let _this = this;
     return new Promise(async (resolve, reject) => {
       try {
-        let shop = this.shop;
-        let cartproxy = {
-          address: config.apphostcartproxy,
-          api_key: config.hara_app.app_id,
-          secret_key: config.hara_app.app_secret
-        };
-        let cartproxyCreated = await API.call(API.OMNI.CARTPROXY.CREATE, { shop , body: {cartproxy}});
-        if(cartproxyCreated && cartproxyCreated.id){
-          await ShopMD.findOneAndUpdate({_id: shop._id}, {$set: {cart_proxy_register: cartproxyCreated}});
-          return resolve(cartproxyCreated);
-        }
         resolve();
       } catch (error) {
         nlogger.writelog(nlogger.NLOGGER_ERROR, error, { filename: __filename, fn: 'registerCartProxy' }, { data: _this.shop });

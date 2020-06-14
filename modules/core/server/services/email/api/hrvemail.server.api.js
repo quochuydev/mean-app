@@ -136,7 +136,7 @@ EmailAPI.sendExportErrorTemplate = function (shopInfo) {
       let ToName = 'quochuydev1';
       let ToAddress = 'quochuydev1@gmail.com';
       let Subject = "Cập nhật dữ liệu Google Product Feed không thành công";
-      let linkApp = config.protocol + shopInfo._id + '/adminv2/apps/' + config.hara_app.app_id;
+      let linkApp = config.protocol + shopInfo._id + '/adminv2/apps/';
 
       let viewData = {
         ToName: ToName,

@@ -6,7 +6,6 @@ const { injectConfig } = require('./call.server.api');
 const _is = require(path.resolve('./modules/core/share/lib/_is.lib.share'));
 const { ErrorAdapter } = require(path.resolve('./modules/core/server/libs/error-adapters.server.lib'));
 const { ERR } = require('../libs/errors.server.lib');
-const { hara_app } = require(path.resolve('./config/config'));
 
 const OMNI = { code: 'SV_OMNI' };
 

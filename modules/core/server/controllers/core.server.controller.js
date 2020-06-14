@@ -19,12 +19,9 @@ exports.renderIndex = function (req, res) {
   var signature = req.query.signature || '';
   var code = req.query.code || '';
   var embed = config.embed;
-  var embedUrl = config.protocol + shop + '/adminv2/apps/' + config.hara_app.app_id;
   var domain = url.parse(config.apphost).hostname;
   let indexTemplate = embed ? 'modules/core/server/views/index-embed' : 'modules/core/server/views/index';
   res.render(indexTemplate, {
-    appid: config.hara_app.app_id,
-    embedUrl: embedUrl,
     domain: domain,
     shopname: shop,
     orgid: orgid,
