@@ -1,0 +1,148 @@
+<header-title page-title="Khuyến mãi"></header-title>
+<div class="panel-box bg-none border-none">
+  <div class="row p-b-15">
+    <div class="col-md-12" style="display: flex;">
+      <div class="filter-box p-r-5">
+        <button ng-click="elem.tooltip.filter.toggle()" class="btn btn-default color-black" style="min-height: 40px;">
+          <i class="fa fa-chevron-down"></i> Thêm điều kiện lọc</button>
+        <div class="filter-box_detail" ng-show="tooltipFilter">
+          <p>Hiển thị chương trình khuyến mãi theo</p>
+          <select name="filter_case" id="filter_case" class="form-control" ng-model="elem.filter.caseFilter"
+            ng-change="elem.filter.change()">
+            <option value="status">Tình trạng</option>
+            <option value="product">Sản phẩm mua</option>
+            <option value="customer_groups.id">Nhóm khách hàng</option>
+            <option value="source_names.code">Kênh áp dụng</option>
+            <option value="locations.id">Cửa hàng</option>
+            <option value="user_created">Người tạo</option>
+          </select>
+          <p class="m-y-10">là</p>
+          <select name="filter_selected" id="filter_selected" class="form-control"
+            ng-if="!['product'].includes(elem.filter.caseFilter)" ng-model="elem.filter.selected"
+            ng-options="item as _do.joinS([item[elem.filter.prop_name], item[elem.filter.prop_sub_name]]) for item in elem.filter.items">
+          </select>
+          <search-box-products-variant ng-if="['product'].includes(elem.filter.caseFilter)" hide-icon="true"
+            selected-item="elem.filter.selected" params="searchBoxParams">
+          </search-box-products-variant>
+          <multi-select-box ng-if="[''].includes(elem.filter.caseFilter)" init-items="elem.filter.items"
+            output-properties="id first_name last_name email" button-label="first_name last_name"
+            item-label="first_name last_name" init-selected-items="null" ng-model="elem.filter.selected">
+          </multi-select-box>
+          <div class="right m-t-15">
+            <a href="#" class="btn btn-default" ng-click="elem.tooltip.filter.cancel();">Hủy</a>
+            <a href="#" class="btn btn-primary" ng-click="addFilter(); tooltipFilter = false;">Thêm
+              điều kiện lọc</a>
+          </div>
+        </div>
+      </div>
+      <div class="input-addon" style="width: 100%; margin: -1px;">
+        <div class="input-addon_icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="icon-svg">
+            <path
+              d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8m9.707 4.293l-4.82-4.82A5.968 5.968 0 0 0 14 8 6 6 0 0 0 2 8a6 6 0 0 0 6 6 5.968 5.968 0 0 0 3.473-1.113l4.82 4.82a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414">
+            </path>
+          </svg>
+        </div>
+        <input type="text" class="form-control" placeholder="Nhập mã/tên chương trình để tìm kiếm" ng-model="codeSearch"
+          ng-keyup="changeCodeSearch()" style="border: none; height: 39px;" />
+      </div>
+      <a ui-sref="admin.promotions-create" class="btn btn-primary right m-l-5" style="line-height: 22px;">
+        <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" class="icon-svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M6.99992 0.333374C3.31992 0.333374 0.333252 3.32004 0.333252 7.00004C0.333252 10.68 3.31992 13.6667 6.99992 13.6667C10.6799 13.6667 13.6666 10.68 13.6666 7.00004C13.6666 3.32004 10.6799 0.333374 6.99992 0.333374ZM6.33325 3.66671V6.33337H3.66658V7.66671H6.33325V10.3334H7.66658V7.66671H10.3333V6.33337H7.66658V3.66671H6.33325ZM1.66659 7.00004C1.66659 9.94004 4.05992 12.3334 6.99992 12.3334C9.93992 12.3334 12.3333 9.94004 12.3333 7.00004C12.3333 4.06004 9.93992 1.66671 6.99992 1.66671C4.05992 1.66671 1.66659 4.06004 1.66659 7.00004Z">
+          </path>
+        </svg>
+        Tạo khuyến mãi
+      </a>
+    </div>
+    <div class="col-md-12">
+      <ul>
+        <li ng-repeat="filter in filters" ng-if="filter.text" class="tag-filter">
+          <span>{{filter.text}}</span>
+          <svg viewBox="0 0 32 32" style="width: 10px; height: 10px; cursor: pointer; color: #212121;"
+            ng-click="removeFilter(filter.key)">
+            <path
+              d="M18.263 16l10.07-10.07c.625-.625.625-1.636 0-2.26s-1.638-.627-2.263 0L16 13.737 5.933 3.667c-.626-.624-1.637-.624-2.262 0s-.624 1.64 0 2.264L13.74 16 3.67 26.07c-.626.625-.626 1.636 0 2.26.312.313.722.47 1.13.47s.82-.157 1.132-.47l10.07-10.068 10.068 10.07c.312.31.722.468 1.13.468s.82-.157 1.132-.47c.626-.625.626-1.636 0-2.26L18.262 16z">
+            </path>
+          </svg>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive" style="max-width: 100%; min-width: 100%; overflow-x: auto; overflow-y: hidden;"
+        loading="loadingTable" loading-timeout="800">
+        <table class="table table-promotion">
+          <thead>
+            <th width="150">Mã chương trình</th>
+            <th width="410" style="min-width: 300px;">Chi tiết</th>
+            <th width="150">Bắt đầu</th>
+            <th width="150">Kết thúc</th>
+            <th width="150">Người tạo</th>
+            <th class="width_header_tooltip text-center" width="50"></th>
+          </thead>
+          <tbody>
+            <tr ng-if="!totalItems">
+              <td colspan="6" class="text-center" style="height: 100px; line-height: 100px;">{{MSG('ME-00001')}}</td>
+            </tr>
+            <tr ng-if="totalItems" ng-repeat="promotion in promotions track by promotion._id">
+              <td>
+                <a ui-sref="admin.promotions-detail({promotionId: promotion._id})">
+                  <i class="fa fa-circle" style="color: #DD5D35;" ng-if="promotion.status != 1"></i>
+                  <i class="fa fa-circle" style="color: #03A9F4;" ng-if="promotion.status == 1"></i>
+                  {{promotion.code}}
+                </a>
+              </td>
+              <td>
+                <p>{{promotion.name}}</p>
+                <span ng-bind-html="promotion.description" class="m-b-5" style="display: block;"></span>
+                <p><span class="text-gray">Đối tượng khách hàng:</span> {{promotion._customer_groups || 'Tất cả'}}</p>
+                <p><span class="text-gray">Kênh áp dụng:</span> {{promotion._source_names || 'Tất cả'}}</p>
+                <p><span class="text-gray">Cửa hàng:</span> {{promotion._locations || 'Tất cả'}}</p>
+              </td>
+              <td>{{(promotion.start_date | formatVnDateHourMin) || '-'}}</td>
+              <td>{{(promotion.end_date | formatVnDateHourMin) || '-'}}</td>
+              <td>{{[promotion._user_created.first_name, promotion._user_created.last_name].join(' ')}}</td>
+              <td class="text-center">
+                <tooltip-action data="promotion" func="elem.action"></tooltip-action>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <select name="limit" id="limit" class="form-control" ng-model="itemsPerPage"
+        ng-change="currentPage = 1; changePage();">
+        <option value="10">Hiển thị 10</option>
+        <option value="20">Hiển thị 20</option>
+        <option value="50">Hiển thị 50</option>
+      </select>
+    </div>
+    <div class="col-md-10">
+      <div class="right" ng-if="totalItems > 0">
+        <span class="text-11 color-gray p-r-10" style="line-height: 32px;">Tổng: {{totalItems}}</span>
+        <uib-pagination max-size="5" items-per-page="itemsPerPage" total-items="totalItems" boundary-link-numbers="true"
+          force-ellipses="true" direction-links="false" class="m-t-none m-b-none right" ng-model="$parent.currentPage"
+          ng-change="changePage()">
+        </uib-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<modal title-modal="XÁC NHẬN" visible="isShowDeletePromotion">
+  <div style="min-height: 100px;">
+    <p>Bạn có chắc muốn xóa dữ liệu đã chọn không?</p>
+  </div>
+  <div class="right">
+    <a href="#" class="btn btn-default" ng-click="elem.modal.close()">Hủy</a>
+    <a href="#" class="btn btn-primary" ng-click="elem.action.delete(promotionId)">Xác nhận</a>
+  </div>
+</modal>

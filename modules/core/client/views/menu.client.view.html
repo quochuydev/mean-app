@@ -1,0 +1,46 @@
+<section class="vbox" ng-controller="MenuController">
+  <header class="scrollable m-b-sm" style="position: relative;">
+    <div class="right" style="color: white; position: absolute; top: 0; right: 5px; font-size: 18px;">
+      <i class="fa fa-times cursor-pointer show-icon-mobile-menu" ng-click="hideMobileMenu()"></i>
+    </div>
+    <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px"
+      data-railOpacity="0.2">
+      <div class="clearfix nav-user">
+        <div class="col-sm-12 p-t-m">
+          <img id="logo" ng-src="{{ appslug+'/'+logo }}" alt="{{ appTitle }}">
+        </div>
+        <div class="col-sm-12 text-right">
+          <strong class="text-white fz-15">PROMOTION ENTERPRISE</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <body>
+    <nav class="nav-primary">
+      <ul class="items-menu" data-ride="collapse">
+        <li class="item-menu" ng-repeat="item in menu.items | orderBy: 'position'"
+          ng-class="{'in-active': activeMenu($state.current.name, item.items)}">
+          <a ui-sref="{{item.state}}" ui-sref-opts="{reload:true}" class="auto">
+            <i class="menu-icon {{item.icon}}"></i>
+            <span class="menu-title">{{item.title}}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+  </body>
+
+  <footer class="footer no-padder text-center-nav-xs">
+    <ul class="items-menu ">
+      <li class="item-menu">
+        <span class="menu-title">Cấu hình</span>
+      </li>
+      <li class="item-menu">
+        <a ui-sref="admin.settings" ui-sref-opts="{reload:true}" class="auto">
+          <span class="menu-title">Góp ý</span>
+        </a>
+      </li>
+    </ul>
+  </footer>
+</section>

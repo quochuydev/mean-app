@@ -1,0 +1,170 @@
+<header-title main-href="admin.promotions" page-title="{{promotion.code}}"
+  main-title="Khuyến mãi">
+</header-title>
+<div class="panel-box p-15">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table-promotion_detail" style="white-space: normal;">
+        <tr>
+          <td class="info-title">Thông tin khuyến mãi</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Trạng thái</td>
+          <td>{{ promotion.status == 1 ? 'Hoạt động' : 'Không hoạt động' }}</td>
+        </tr>
+        <tr>
+          <td>Mã CTKM</td>
+          <td>{{ promotion.code }}</td>
+        </tr>
+        <tr>
+          <td>Tên CTKM</td>
+          <td>{{ promotion.name }}</td>
+        </tr>
+        <tr>
+          <td>Thời gian</td>
+          <td>{{promotion.start_date | formatVnDateTime }} đến {{(promotion.end_date | formatVnDateTime) || '--'}}</td>
+        </tr>
+        <tr>
+          <td>Nhóm khách hàng</td>
+          <td>{{promotion._customer_groups || 'Tất cả'}}</td>
+        </tr>
+        <tr>
+          <td>Kênh áp dụng</td>
+          <td>{{promotion._source_names || 'Tất cả'}}
+          </td>
+        </tr>
+        <tr>
+          <td>Cửa hàng</td>
+          <td>
+            <ul>
+              <li ng-if="promotion.locations.length" ng-repeat="location in promotion.locations">{{location.name}}</li>
+              <li ng-if="!promotion.locations.length">Tất cả</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Loại CTKM</td>
+          <td>{{PromotionUtil._TYPE(promotion.type)}}</td>
+        </tr>
+        <tr>
+          <td class="info-title">Sản phẩm mua</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Số lượng</td>
+          <td>{{promotion.condition_quantity}}</td>
+        </tr>
+        <tr>
+          <td>Danh sách sản phẩm</td>
+          <td>
+            <div class="panel-scroll-product">
+              <div class="product-table m-none">
+                <div class="product-table_header m-y-5 p-b-10 text-700 color-gray">
+                  <div class="col-xs-2">
+                    VariantId
+                  </div>
+                  <div class="col-xs-10">
+                    Sản phẩm
+                  </div>
+                </div>
+
+                <div class="product-table_body p-x-10" ng-repeat="item in promotion.condition_items">
+                  <div class="product-table_line-main" ng-repeat="variant in item.variants" style="height: 50px;">
+                    <div class="row">
+                      <div class="col-xs-2">
+                        {{variant.variant_id}}
+                      </div>
+                      <div class="col-xs-10">
+                        <div class="product-table_line-main-name" style="position: relative;">
+                          <div class="product-image" style="position: absolute; top: -5px;">
+                            <img ng-if="item.product_image" ng-src="{{item.product_image}}" width="40px">
+                            <div ng-if="!item.product_image" class="img-empty img-empty-bg fa-empty-images"
+                              style="position: absolute; top: 0;"></div>
+                          </div>
+                          <div class="product-title" style="margin-left: 50px;">
+                            <p>{{_do.joinS([item.product_name, variant.variant_title, variant.variant_sku], ' || ')}}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="info-title">Sản phẩm khuyến mãi</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Danh sách sản phẩm</td>
+          <td>
+            <div class="panel-scroll-product">
+              <div class="product-table m-none">
+                <div class="product-table_header m-y-5 p-b-10 text-700 color-gray">
+                  <div class="col-xs-2">
+                    VariantId
+                  </div>
+                  <div class="col-xs-4">
+                    Sản phẩm
+                  </div>
+                  <div class="col-xs-2 text-center">
+                    SL khuyến mãi
+                  </div>
+                  <div class="col-xs-2 text-center">
+                    Giảm theo
+                  </div>
+                  <div class="col-xs-2 text-center">
+                    Giá trị giảm
+                  </div>
+                </div>
+
+                <div class="product-table_body p-x-10" ng-repeat="item in promotion.promotion_items">
+                  <div class="product-table_line-main" style="min-height: 50px;" ng-repeat="variant in item.variants">
+                    <div class="row">
+                      <div class="col-xs-2">
+                        {{variant.variant_id}}
+                      </div>
+                      <div class="col-xs-4">
+                        <div class="product-table_line-main-name" style="position: relative;">
+                          <div class="product-image" style="position: absolute; top: 0;">
+                            <img ng-if="item.product_image" ng-src="{{item.product_image}}" width="40px">
+                            <div ng-if="!item.product_image" class="img-empty img-empty-bg fa-empty-images"
+                              style="position: absolute; top: 0;"></div>
+                          </div>
+                          <div class="product-title" style="margin-left: 50px;">
+                            <p>{{_do.joinS([item.product_name, variant.variant_title, variant.variant_sku], ' || ')}}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-2">
+                        <div class="product-table_line-main-quantity text-center">
+                          {{variant.rule[0].quantity_apply}}
+                        </div>
+                      </div>
+                      <div class="col-xs-2">
+                        <div class="product-table_line-product_discount_type text-center">
+                          {{PromotionUtil._DISCOUNT_TYPE_DETAIL(variant.rule[0].promotion_type)}}
+                        </div>
+                      </div>
+                      <div class="col-xs-2">
+                        <div class="product-table_line-main-discount text-center">
+                          {{PromotionUtil._PROMOTION_VALUE(variant.rule[0].promotion_value, variant.rule[0].promotion_type, '-')}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

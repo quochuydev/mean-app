@@ -1,0 +1,30 @@
+<section class="title-bar">
+  <section class="left">
+    <h3>
+      <i class="fa fa-bars cursor-pointer show-icon-mobile-menu" ng-click="showMobileMenu()"></i>
+      <a ng-if="mainTitle" class="main-title" ui-sref="{{mainHref}}">
+        {{mainTitle}} <i class="fa fa-chevron-right" style="font-size: 11px;"></i>
+      </a>
+      {{pageTitle}}
+    </h3>
+  </section>
+  <section class="title-bar-user right">
+    <div class="title-bar-user-name">{{userName}}</div>
+    <div style="position: relative;">
+      <div class="title-bar-user-image" ng-click="toggle()">
+        <span style="color: white">{{userImage}}</span>
+      </div>
+      <div class="tooltip-action_options tooltip-action_options-user" ng-show="isShow">
+        <ul>
+          <li class="cursor-default">
+            <b>{{userName}}</b>
+            <p class="m-none">{{userEmail}}</p>
+          </li>
+          <li class="hover p-none" style="border-top: 1px solid rgba(228, 228, 228, 1);">
+            <a class="m-none p-15" style="display: block; color: #000;" href="/{{appslug}}/logout" ng-click="logout()" target="_self">Đăng xuất</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</section>

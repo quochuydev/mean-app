@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="app js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie8 no-ie10 no-ie11 no-ios">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW" />
+  <base href="/">
+  <title page-title></title>
+  <meta name="description" content="{{description}}">
+  <meta name="fragment" content="!">
+
+  <!-- Apple META -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Fav Icon -->
+  <link id="favicon" href="{{appslug}}/{{favicon}}?version={{appversion}}" rel="shortcut icon" type="image/x-icon">
+
+  <!-- Application CSS Files -->
+  {% for cssFile in cssFiles %}
+  <link rel="stylesheet" href="{{appslug}}/{{cssFile}}?version={{appversion}}">{% endfor %}
+
+  <!-- notifications -->
+  <!--  <link rel="manifest" href="{{appslug}}/api/notifications/manifest.json" />-->
+</head>
+
+<body>
+  <section class="vbox">
+    <div ng-include="'{{appslug}}/modules/core/client/views/header.client.view.html'"></div>
+    <section ng-controller="MainController" class="main-wrapper">
+      <section class="hbox stretch">
+        <aside ng-if="authentication.user"
+          class="mobile-menu hide-mobile-menu bgr-menu aside-md hidden-print menu-aside" id="nav"
+          ng-include="'{{appslug}}/modules/core/client/views/menu.client.view.html'"
+          style="position: fixed; z-index: 1000; height: 100%;"></aside>
+        {% block content %}{% endblock %}
+      </section>
+    </section>
+  </section>
+  <!--Embedding The User Object-->
+  <script type="text/javascript">
+    var appslug = '{{ appslug }}';
+    var appslugAdmin = '{{ appslugAdmin }}';
+    var logo = '{{ logo }}';
+    var appversion = '{{ appversion }}';
+    var apphost = '{{ apphost }}';
+    var middle_location = '{{ middle_location }}';
+    var appTitle = '{{ title }}';
+    var appDescription = '{{ description }}';
+    var fileSizeImportCustomer = '{{ fileSizeImportCustomer }}';
+    var listOrderStatus = '{{ listOrderStatus }}';
+    var permissionSetting = '{{ permissionSetting }}';
+    var filterText = '{{ filterText }}';
+    var listShopLogin = '{{ listShopLogin }}';
+    var sync_xml_tles = '{{ sync_xml_tles }}';
+    var isShowPreOrder = '{{ isShowPreOrder }}';
+    var isShowOrderProcessingTime = '{{ isShowOrderProcessingTime }}';
+    var showPickingList = '{{ showPickingList }}';
+    var browserNotify = '{{ browserNotify }}';
+    var browserToken = null;
+  </script>
+
+  <!--Application JavaScript Files-->
+  {% for jsFile in jsFiles %}
+  <script type="text/javascript" src="{{appslug}}/{{jsFile}}?version={{appversion}}"></script>{% endfor %}
+
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<div class="tooltip-action">
+  <a href="#" class="tooltip-icon-toggle color-black text-center"
+    style="font-size: 20px; width: 30px;" ng-click="showOptions()">
+    <i class="fa fa-ellipsis-v" style="width: 30px;"></i>
+  </a>
+  <div class="tooltip-action_options tooltip-action_options-tooltip p-none" ng-show="isShow" ng-style="{ 'left' : tooltip_size }">
+    <ul>
+      <li style="border-bottom: 1px solid rgba(228, 228, 228, 1); border-radius: 3px 3px 0 0;" ng-click="action.inactive(data._id)">
+        Ngừng khuyến mãi</li>
+      <li style="border-bottom: 1px solid rgba(228, 228, 228, 1);" ng-click="action.active(data._id)">
+        Sử dụng khuyến mãi</li>
+      <li ng-click="action.delete(data._id)" style="border-radius: 0 0 3px 3px;">Xóa khuyến mãi</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" class="app js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie8 no-ie10 no-ie11 no-ios">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW" />
+    <base href="/">
+    <title page-title></title>
+    <meta name="description" content="{{description}}">
+    <meta name="fragment" content="!">
+
+    <!-- Fav Icon -->
+    <link href="{{appslugEmbed}}/{{faviconEmbed}}?v={{ appversion }}" rel="shortcut icon" type="image/x-icon">
+
+    <!-- Application CSS Files -->
+    {% for cssFile in cssEmbedFiles %}<link rel="stylesheet" href="{{appslugEmbed}}/{{cssFile}}?v={{ appversion }}">{% endfor %}
+</head>
+
+<body>
+
+<div id="{{appid}}" class="vbox hide">
+    {% block content %}{% endblock %}
+</div>
+
+<div id="authenticate" style="display:none;">{{embedUrl}}</div>
+<div id="embed" style="display:none;">{{embed}}</div>
+
+
+<script type="text/javascript">
+  var env = "{{ env }}";
+  var pagetitle = '{{ title }}';
+  var appslug = '{{ appslugEmbed }}';
+  var appslugAdmin = '{{ appslugAdmin }}';
+  var apphost = '{{ apphost }}';
+  var appid = '{{ appid }}';
+  var shopname = '{{ shopname }}';
+  var orgid = '{{ orgid }}';
+  var timestamp = '{{ timestamp }}';
+  var signature = '{{ signature }}';
+  var code = '{{ code }}';
+
+
+
+</script>
+
+<!--Application JavaScript Files-->
+{% for jsFile in jsEmbedFiles %}<script type="text/javascript" src="{{appslugEmbed}}/{{jsFile}}?v={{ appversion }}"></script>{% endfor %}
+<script>
+  var iframe_redirect_url = '{{iframe_redirect_url}}';
+  iframe_redirect_url = decodeURIComponent(iframe_redirect_url);
+  var appid = '{{ appid }}';
+  var shopname = '{{ shopname }}';
+  var AppBridge = window['app-sdk'];
+  var createApp = AppBridge.createApp;
+  var actions = AppBridge.actions;
+  const app = createApp({
+    appid: appid,
+    shopOrigin: shopname,
+    embedded: '{{embed}}'
+  });
+  var Redirect = actions.Redirect;
+  var Toast = actions.Toast;
+  var LoadingSDK = actions.Loading;
+
+  var loading = LoadingSDK.create(app);
+  var redirect = Redirect.create(app);
+
+  if (iframe_redirect_url) {
+    redirect.dispatch(Redirect.Action.REMOTE, iframe_redirect_url);
+  }
+
+  document.getElementById(appid).classList.remove("hide");
+
+</script>
+
+
+</body>
+
+</html>

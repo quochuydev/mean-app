@@ -1,0 +1,32 @@
+{
+  "name": "dlcapp",
+  "description": "dlcapp",
+  "homepage": "http://meanjs.org/",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.3",
+    "angular-animate": "~1.3",
+    "angular-file-upload": "1.1.5",
+    "angular-messages": "~1.3.17",
+    "angular-mocks": "~1.3",
+    "angular-resource": "~1.3",
+    "angular-ui-router": "~0.2",
+    "angular-ui-utils": "bower",
+    "bootstrap": "3.4.1",
+    "owasp-password-strength-test": "~1.3.0",
+    "ngstorage": "^0.3.10",
+    "string": "^3.3.1",
+    "bootstrap-ui-datetime-picker": "2.5.4",
+    "angular-sanitize": "1.5.8",
+    "isteven-angular-multiselect": "^4.0.0",
+    "angular-bootstrap-colorpicker": "^3.0.25",
+    "angular-debounce": "^1.1.0",
+    "JsBarcode": "jsbarcode#^3.8.0",
+    "ng-tags-input": "^3.2.0",
+    "font-awesome": "^5.8.1",
+    "jquery": "~3.3.1"
+  },
+  "resolutions": {
+    "angular": "~1.3"
+  }
+}
