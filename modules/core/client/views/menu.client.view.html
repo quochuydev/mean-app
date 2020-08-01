@@ -6,12 +6,7 @@
     <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px"
       data-railOpacity="0.2">
       <div class="clearfix nav-user">
-        <div class="col-sm-12 p-t-m">
-          <img id="logo" ng-src="{{ appslug+'/'+logo }}" alt="{{ appTitle }}">
-        </div>
-        <div class="col-sm-12 text-right">
-          <strong class="text-white fz-15">PROMOTION ENTERPRISE</strong>
-        </div>
+        <img class="p-t-m" id="logo" ng-src="{{ appslug+'/'+logo }}" alt="{{ appTitle }}">
       </div>
     </div>
   </header>
@@ -23,7 +18,8 @@
           ng-class="{'in-active': activeMenu($state.current.name, item.items)}">
           <a ui-sref="{{item.state}}" ui-sref-opts="{reload:true}" class="auto">
             <!-- <i class="menu-icon {{item.icon}}"></i> -->
-            <span class="menu-title">{{item.title}}</span>
+            <!-- <span class="menu-title">{{item.title}}</span> -->
+            <span class="menu-title"><i class="menu-icon {{item.icon}}"></i></span>
           </a>
         </li>
       </ul>
@@ -31,7 +27,7 @@
 
   </body>
 
-  <footer class="footer no-padder text-center-nav-xs">
+  <!-- <footer class="footer no-padder text-center-nav-xs">
     <ul class="items-menu ">
       <li class="item-menu">
         <span class="menu-title">Cấu hình</span>
@@ -42,5 +38,5 @@
         </a>
       </li>
     </ul>
-  </footer>
+  </footer> -->
 </section>

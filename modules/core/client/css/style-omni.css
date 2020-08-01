@@ -1,3 +1,7 @@
+
+/* EA6079 */
+/* #EF5350 */
+
 body {
     font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -13,7 +17,7 @@ li {
 }
 
 .bgr-menu {
-    background-color: #0D3064;
+    background-color: #EA6079;
 }
 
 .fz-15 {
@@ -31,7 +35,8 @@ li {
 }
 
 .item-menu {
-    padding: 13px 10px 13px 20px;
+    text-align: center;
+    padding: 13px 10px 13px 8px;
     border-left: 3px solid transparent;
 }
 
@@ -47,7 +52,7 @@ li {
 }
 
 .menu-icon {
-    padding: 3px;
+    font-size: 20px;
 }
 
 .menu-title {
@@ -389,7 +394,7 @@ li {
 }
 
 .tooltip-action_options-tooltip li:hover {
-    background-color: #0D3064;
+    background-color: #EA6079;
     color: white !important;
 }
 
@@ -425,7 +430,7 @@ li {
 }
 
 .tooltip-action_options-user li.hover:hover {
-    background-color: #0D3064;
+    background-color: #EA6079;
     border-radius: 0 0 4px 4px;
 }
 
@@ -461,7 +466,7 @@ li {
 
 .info-title {
     font-weight: 700;
-    color: #0D3064 !important;
+    color: #EA6079 !important;
 }
 
 .table-promotion_detail {
@@ -635,4 +640,10 @@ select {
 
 .panel-footer {
     padding: 0;
+}
+
+.btn-sweet {
+    color: #fff;
+    background-color: #EA6079;
+    border-color: #EF5350;
 }
