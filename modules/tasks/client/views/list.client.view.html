@@ -30,7 +30,7 @@
           </multi-select-box>
           <div class="right m-t-15">
             <a href="#" class="btn btn-default" ng-click="elem.tooltip.filter.cancel();">Hủy</a>
-            <a href="#" class="btn btn-primary" ng-click="addFilter(); tooltipFilter = false;">Thêm
+            <a href="#" class="btn btn-sweet" ng-click="addFilter(); tooltipFilter = false;">Thêm
               điều kiện lọc</a>
           </div>
         </div>
@@ -46,7 +46,7 @@
         <input type="text" class="form-control" placeholder="Nhập mã/tên chương trình để tìm kiếm" ng-model="codeSearch"
           ng-keyup="changeCodeSearch()" style="border: none; height: 39px;" />
       </div>
-      <a ui-sref="admin.tasks-create" class="btn btn-primary right m-l-5" style="line-height: 22px;">
+      <a ui-sref="admin.tasks-create" class="btn btn-sweet right m-l-5" style="line-height: 22px;">
         <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" class="icon-svg">
           <path fill-rule="evenodd" clip-rule="evenodd"
             d="M6.99992 0.333374C3.31992 0.333374 0.333252 3.32004 0.333252 7.00004C0.333252 10.68 3.31992 13.6667 6.99992 13.6667C10.6799 13.6667 13.6666 10.68 13.6666 7.00004C13.6666 3.32004 10.6799 0.333374 6.99992 0.333374ZM6.33325 3.66671V6.33337H3.66658V7.66671H6.33325V10.3334H7.66658V7.66671H10.3333V6.33337H7.66658V3.66671H6.33325ZM1.66659 7.00004C1.66659 9.94004 4.05992 12.3334 6.99992 12.3334C9.93992 12.3334 12.3333 9.94004 12.3333 7.00004C12.3333 4.06004 9.93992 1.66671 6.99992 1.66671C4.05992 1.66671 1.66659 4.06004 1.66659 7.00004Z">
@@ -117,7 +117,7 @@
       <div class="right" ng-if="totalItems > 0">
         <span class="text-11 color-gray p-r-10" style="line-height: 32px;">Tổng: {{totalItems}}</span>
         <uib-pagination max-size="5" items-per-page="itemsPerPage" total-items="totalItems" boundary-link-numbers="true"
-          force-ellipses="true" direction-links="false" class="m-t-none m-b-none right" ng-model="$parent.currentPage"
+          force-ellipses="true" direction-links="false" class="m-t-none m-none right" ng-model="$parent.currentPage"
           ng-change="changePage()">
         </uib-pagination>
       </div>
@@ -131,6 +131,6 @@
   </div>
   <div class="right">
     <a href="#" class="btn btn-default" ng-click="elem.modal.close()">Hủy</a>
-    <a href="#" class="btn btn-primary" ng-click="elem.action.delete(taskId)">Xác nhận</a>
+    <a href="#" class="btn btn-sweet" ng-click="elem.action.delete(taskId)">Xác nhận</a>
   </div>
 </modal>

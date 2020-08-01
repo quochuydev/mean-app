@@ -21,8 +21,6 @@
   {% for cssFile in cssFiles %}
   <link rel="stylesheet" href="{{appslug}}/{{cssFile}}?version={{appversion}}">{% endfor %}
 
-  <!-- notifications -->
-  <!--  <link rel="manifest" href="{{appslug}}/api/notifications/manifest.json" />-->
 </head>
 
 <body>
@@ -31,7 +29,7 @@
     <section ng-controller="MainController" class="main-wrapper">
       <section class="hbox stretch">
         <aside ng-if="authentication.user"
-          class="mobile-menu hide-mobile-menu bgr-menu aside-md hidden-print menu-aside" id="nav"
+          class="mobile-menu hide-mobile-menu bgr-menu aside-xs hidden-print menu-aside" id="nav"
           ng-include="'{{appslug}}/modules/core/client/views/menu.client.view.html'"
           style="position: fixed; z-index: 1000; height: 100%;"></aside>
         {% block content %}{% endblock %}
