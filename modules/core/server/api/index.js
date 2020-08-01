@@ -7,8 +7,8 @@ const callAPI = CallAPI({ now: () => moment().utc(7).format('DD/MM/YYYY HH:mm:ss
 module.exports = {
   call: callAPI,
   ...require('./file-cloud.server.api'),
-  ...require('./hr.server.api'),
-  ...require('./omni.server.api'),
+  // ...require('./hr.server.api'),
+  // ...require('./omni.server.api'),
 };
 
 { //------------------- TEST --------------------//

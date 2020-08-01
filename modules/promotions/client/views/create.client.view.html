@@ -209,18 +209,18 @@
           </form-datetime-picker>
         </div>
 
-        <div class=" form-group p-x-15">
+        <div class="form-group p-x-15">
           <p>Thời gian kết thúc khuyến mãi <span style="color:#f00">*</span></p>
           <form-datetime-picker id="end_date" fz="11.6" ng-model="elem.promotion.end_date"
-            init-date="elem.promotion.end_date" enable-time="true" class="no-padding" disabled="elem.promotion.not_expired"
-            is-required="!elem.promotion.not_expired">
+            init-date="elem.promotion.end_date" enable-time="true" class="no-padding"
+            disabled="elem.promotion.not_expired" is-required="!elem.promotion.not_expired">
           </form-datetime-picker>
         </div>
 
-        <div class="checkbox">
-          <label class="p-none"><input type="checkbox" value="true" id="promotion_not_expired"
-              name="promotion_not_expired" ng-model="elem.promotion.not_expired" style="margin-top: 3px;"
-              ng-change="changeIsExpired()">
+        <div class="form-group p-x-15">
+          <label class="p-none">
+            <input type="checkbox" value="true" id="promotion_not_expired" name="promotion_not_expired"
+              ng-model="elem.promotion.not_expired" ng-change="changeIsExpired()" class="">
             <span>Không bao giờ hết hạn</span>
           </label>
         </div>

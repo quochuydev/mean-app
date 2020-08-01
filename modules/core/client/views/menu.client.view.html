@@ -22,7 +22,7 @@
         <li class="item-menu" ng-repeat="item in menu.items | orderBy: 'position'"
           ng-class="{'in-active': activeMenu($state.current.name, item.items)}">
           <a ui-sref="{{item.state}}" ui-sref-opts="{reload:true}" class="auto">
-            <i class="menu-icon {{item.icon}}"></i>
+            <!-- <i class="menu-icon {{item.icon}}"></i> -->
             <span class="menu-title">{{item.title}}</span>
           </a>
         </li>
