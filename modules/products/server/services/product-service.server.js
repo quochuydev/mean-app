@@ -19,7 +19,7 @@ ProductService.process = require('./activities/product-service.process.server')(
 ProductService.makeDataWrite = require('./activities/product-service.make-data-write.server')(di);
 ProductService.write = require('./activities/product-service.write.server')(di);
 ProductService.delete = require('./activities/product-service.delete.server')(di);
-ProductService.scrollSeller = require('./activities/product-service.scroll-seller.server')(di);
+// ProductService.scrollSeller = require('./activities/product-service.scroll-seller.server')(di);
 ProductService.syncSeller = require('./activities/product-service.sync-seller.server')(di);
 ProductService.search = require('./activities/product-service.search.server')(di);
 

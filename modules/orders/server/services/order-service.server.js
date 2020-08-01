@@ -19,7 +19,7 @@ OrderService.process = require('./activities/order-service.process.server')(di);
 OrderService.makeDataWrite = require('./activities/order-service.make-data-write.server')(di);
 OrderService.write = require('./activities/order-service.write.server')(di);
 OrderService.delete = require('./activities/order-service.delete.server')(di);
-OrderService.scrollSeller = require('./activities/order-service.scroll-seller.server')(di);
+// OrderService.scrollSeller = require('./activities/order-service.scroll-seller.server')(di);
 OrderService.syncSeller = require('./activities/order-service.sync-seller.server')(di);
 
 module.exports = { OrderService };
